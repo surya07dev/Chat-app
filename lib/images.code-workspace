@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "images",
+			"path": "../../ichat-master/images"
+		},
+		{
+			"name": "chat_app",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}

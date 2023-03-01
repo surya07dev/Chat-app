@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "909234130361",
+    "project_id": "chat-app-f848e",
+    "storage_bucket": "chat-app-f848e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909234130361:android:b5912f7bd68bab1d69ba68",
+        "android_client_info": {
+          "package_name": "com.suryas.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909234130361-sssjc4boqq41qstfrjnet1dhlhksv1jb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.suryas.chat_app",
+            "certificate_hash": "afcdc4e006f397d0a8ba5f3fc8eddb77a8394642"
+          }
+        },
+        {
+          "client_id": "909234130361-udg7je9b1mts3t4jo15lnmdmjr3qhd2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2Hbk7tEviDazyGMKXmWKMHVBfAagdvZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909234130361-jrtul5vmc4h1jvghvstkopkbooh09jih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
