@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:chat_app/constants/color_constants.dart';
 import 'package:chat_app/providers/auth_provider.dart';
 import 'package:chat_app/screens/home_screen.dart';
@@ -14,6 +16,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      checkSignedIn();
+    });
+  }
+
   void checkSignedIn() async {
     AuthProvider authProvider = context.read<AuthProvider>();
     bool isLoggedIn = await authProvider.isLoggedIn();
@@ -42,11 +51,12 @@ class _SplashScreenState extends State<SplashScreen> {
               "This is the demo chat app",
               style: TextStyle(color: ColorConstants.themeColor),
             ),
+            const SizedBox(height: 20),
             const SizedBox(
               width: 20,
               height: 20,
-              child: CircularProgressIndicator(
-                  color: ColorConstants.themeColor),
+              child:
+                  CircularProgressIndicator(color: ColorConstants.themeColor),
             )
           ],
         ),
