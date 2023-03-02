@@ -46,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () async {
                 bool isSuccess = await authProvider.handleSignIn();
                 if (isSuccess) {
+                  // ignore: use_build_context_synchronously
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(

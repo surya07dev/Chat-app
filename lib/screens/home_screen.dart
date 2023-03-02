@@ -52,29 +52,41 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: isWhite ? Colors.white : Colors.black,
+      appBar: AppBar(
+        title: const Text(
+          "Home Screen",
+          style: TextStyle(color: ColorConstants.primaryColor),
+        ),
+        centerTitle: true,
         backgroundColor: isWhite ? Colors.white : Colors.black,
-        appBar: AppBar(
-          backgroundColor: isWhite ? Colors.white : Colors.black,
-          leading: IconButton(
-            icon: Switch(
-              value: isWhite,
-              onChanged: (value) {
-                setState(() {
-                  isWhite = value;
-                  print(isWhite);
-                });
-              },
-              activeColor: Colors.white,
-              activeTrackColor: Colors.grey,
-              inactiveTrackColor: Colors.grey,
-              inactiveThumbColor: Colors.black45,
-            ),
-            onPressed: () {},
+        leading: IconButton(
+          icon: Switch(
+            value: isWhite,
+            onChanged: (value) {
+              setState(() {
+                isWhite = value;
+              });
+            },
+            activeColor: Colors.white,
+            activeTrackColor: Colors.grey,
+            inactiveTrackColor: Colors.grey,
+            inactiveThumbColor: Colors.black45,
           ),
-          actions: <Widget>[
-            buildPopupMenu(),
-          ],
-        ));
+          onPressed: () {},
+        ),
+        actions: <Widget>[
+          buildPopupMenu(),
+        ],
+      ),
+      body: TextButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const SettingsPage()));
+        },
+        child: const Text("settings"),
+      ),
+    );
   }
 
   Widget buildPopupMenu() {
@@ -107,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (choice.title == "sign out") {
       handleSignOut();
     } else {
-      Navigator.pushReplacement(context,
+      Navigator.push(context,
           MaterialPageRoute(builder: (context) => const SettingsPage()));
     }
   }
