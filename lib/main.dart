@@ -1,6 +1,7 @@
 import 'package:chat_app/constants/app_constants.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/providers/auth_provider.dart';
+import 'package:chat_app/providers/setting_provider.dart';
 import 'package:chat_app/screens/splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +17,7 @@ bool isWhite = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   SharedPreferences prefs = await SharedPreferences.getInstance();
   runApp(MyApp(prefs: prefs));
@@ -39,6 +40,12 @@ class MyApp extends StatelessWidget {
               firebaseFirestore: firebaseFirestore,
               googleSignIn: GoogleSignIn(),
               prefs: prefs),
+        ),
+        Provider<SettingProvider>(
+          create: (_) => SettingProvider(
+              prefs: prefs,
+              firebaseFirestore: firebaseFirestore,
+              firebaseStorage: firebaseStorage),
         )
       ],
       child: MaterialApp(
