@@ -35,6 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context, MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(

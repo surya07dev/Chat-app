@@ -66,7 +66,7 @@ class AuthProvider extends ChangeNotifier {
             .where(FirestoreConstants.id, isEqualTo: firebaseUser.uid)
             .get();
         final List<DocumentSnapshot> document = result.docs;
-        if (document.length == 0) {
+        if (document.isEmpty) {
           firebaseFirestore
               .collection(FirestoreConstants.pathUserCollection)
               .doc(firebaseUser.uid)
@@ -92,10 +92,8 @@ class AuthProvider extends ChangeNotifier {
 
           await prefs.setString(FirestoreConstants.id, userChat.id);
           await prefs.setString(FirestoreConstants.nickname, userChat.nickName);
-          await prefs.setString(FirestoreConstants.photoUrl, userChat.photoURL);
+          await prefs.setString(FirestoreConstants.photoUrl, userChat.photoUrl);
           await prefs.setString(FirestoreConstants.aboutMe, userChat.aboutMe);
-          await prefs.setString(
-              FirestoreConstants.phoneNumber, userChat.phoneNumber);
         }
 
         _status = Status.authenticated;

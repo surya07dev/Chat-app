@@ -1,10 +1,12 @@
 import 'package:chat_app/constants/app_constants.dart';
+import 'package:chat_app/constants/color_constants.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/providers/auth_provider.dart';
+import 'package:chat_app/providers/chat_provider.dart';
+import 'package:chat_app/providers/home_provider.dart';
 import 'package:chat_app/providers/setting_provider.dart';
 import 'package:chat_app/screens/splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -47,16 +49,26 @@ class MyApp extends StatelessWidget {
               prefs: prefs,
               firebaseFirestore: firebaseFirestore,
               firebaseStorage: firebaseStorage),
-        )
+        ),
+        Provider<HomeProvider>(
+          create: (_) => HomeProvider(
+            firebaseFirestore: firebaseFirestore,
+          ),
+        ),
+        Provider<ChatProvider>(
+          create: (_) => ChatProvider(
+            prefs: prefs,
+            firebaseFirestore: firebaseFirestore,
+            firebaseStorage: firebaseStorage,
+          ),
+        ),
       ],
       child: MaterialApp(
         title: AppConstants.appTitle,
         theme: ThemeData(
-          primarySwatch: Colors.purple,
+          primaryColor: ColorConstants.themeColor,
+          primarySwatch: MaterialColor(0xfff5a623, ColorConstants.swatchColor),
         ),
-        localizationsDelegates: const [
-          CountryLocalizations.delegate,
-        ],
         home: const SplashScreen(),
         debugShowCheckedModeBanner: false,
       ),
