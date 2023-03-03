@@ -7,7 +7,7 @@ import 'package:chat_app/main.dart';
 import 'package:chat_app/models/user_chat.dart';
 import 'package:chat_app/providers/setting_provider.dart';
 import 'package:chat_app/widgets/loading_view.dart';
-// import 'package:country_picker/country_picker.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class _SettingsPageStateState extends State<SettingsPageState> {
   TextEditingController? controllerNickname;
   TextEditingController? controllerAboutMe;
 
-  String dialCodedigits = "+00";
+  String dialCodedigits = "+91";
   final TextEditingController _controller = TextEditingController();
 
   String id = '';
@@ -232,35 +232,37 @@ class _SettingsPageStateState extends State<SettingsPageState> {
                       data: Theme.of(context)
                           .copyWith(primaryColor: ColorConstants.primaryColor),
                       child: TextField(
+                        enabled: false,
                         style: const TextStyle(color: Colors.grey),
                         decoration: InputDecoration(
                           hintText: phoneNumber,
                           contentPadding: const EdgeInsets.all(5),
                           hintStyle: const TextStyle(color: Colors.grey),
                         ),
-                        controller: _controller,
                       ),
                     ),
                   ),
 
                   //    <<------------ country code picker ------------>>
 
-                  // Container(
-                  //   margin: const EdgeInsets.only(left: 10, top: 30, bottom: 5),
-                  //   child: SizedBox(
-                  //     width: 400,
-                  //     height: 60,
-                  //     child: showCountryPicker(
-                  //         context: context,
-                  //         onSelect: (Country country) {
-                  //           setState(() {
-                  //             dialCodedigits = country.displayName;
-                  //           });
-                  //         },
-                  //         showPhoneCode: true,
-                  //         favorite: ["+1", "US", "+91", ""]),
-                  //   ),
-                  // ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, top: 30, bottom: 5),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showCountryPicker(
+                          context: context,
+                          onSelect: (Country country) {
+                            setState(() {
+                              dialCodedigits = "+${country.phoneCode}";
+                            });
+                          },
+                          showPhoneCode: true,
+                          favorite: ["+91", "IN", "+1", "US"],
+                        );
+                      },
+                      child: const Text('Show country picker'),
+                    ),
+                  ),
 
                   Container(
                     margin: const EdgeInsets.only(left: 30, right: 30),
@@ -279,8 +281,7 @@ class _SettingsPageStateState extends State<SettingsPageState> {
                                   color: ColorConstants.primaryColor),
                             ),
                             hintText: 'Phone Number',
-                            hintStyle: const TextStyle(
-                                color: Colors.grey),
+                            hintStyle: const TextStyle(color: Colors.grey),
                             prefix: Padding(
                               padding: const EdgeInsets.all(4),
                               child: Text(
@@ -288,8 +289,8 @@ class _SettingsPageStateState extends State<SettingsPageState> {
                                 style: const TextStyle(color: Colors.grey),
                               ),
                             )),
-                            maxLength: 12,
-                            keyboardType: TextInputType.number,
+                        maxLength: 12,
+                        keyboardType: TextInputType.number,
                         controller: _controller,
                       ),
                     ),
@@ -299,8 +300,12 @@ class _SettingsPageStateState extends State<SettingsPageState> {
                     margin: const EdgeInsets.only(top: 50, bottom: 50),
                     child: TextButton(
                       onPressed: handleUpdateData,
-                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(ColorConstants.primaryColor),
-                      padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.fromLTRB(30, 10, 30, 10),)),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              ColorConstants.primaryColor),
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                            const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                          )),
                       child: const Text(
                         'Update Now',
                         style: TextStyle(
@@ -310,16 +315,13 @@ class _SettingsPageStateState extends State<SettingsPageState> {
                       ),
                     ),
                   ),
-
-
-
-
                 ],
               )
             ],
           ),
         ),
-        Positioned(child: isLoading ? const LoadingView() : const SizedBox.shrink())
+        Positioned(
+            child: isLoading ? const LoadingView() : const SizedBox.shrink())
       ],
     );
   }
