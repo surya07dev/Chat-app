@@ -33,10 +33,10 @@ class UserChat {
       aboutMe = doc.get(FirestoreConstants.aboutMe);
     } catch (e) {}
     try {
-      aboutMe = doc.get(FirestoreConstants.photoUrl);
+      nickName = doc.get(FirestoreConstants.nickname);
     } catch (e) {}
     try {
-      aboutMe = doc.get(FirestoreConstants.nickname);
+      photoUrl = doc.get(FirestoreConstants.photoUrl);
     } catch (e) {}
 
     return UserChat(
